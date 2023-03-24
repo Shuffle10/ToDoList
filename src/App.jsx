@@ -1,12 +1,14 @@
 import { useState } from 'react'
-import './App.css'
+import Inputbox from './components/InputBox'
+import Navbar from './components/Navbar'
 
 function App() {
 
 
   return (
     <>
-
+    <Navbar/>
+    <Inputbox/>
     </>
   )
 }
