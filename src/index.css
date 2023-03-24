@@ -20,7 +20,7 @@
     display: flex;
     justify-content: center;
     margin-top: 150px;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
     align-items: center;
     /* gap: 15px; */
 
@@ -67,4 +67,15 @@
     min-height: 50px;
     margin: 10px 0px;
     font-size: 24px;
+}
+
+.task-categories{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    gap: 15px;
+}
+
+.task-categories p{
+    cursor: pointer;
 }

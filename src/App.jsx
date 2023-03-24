@@ -7,24 +7,29 @@ function App() {
 
   const [toDos, setToDos] = useState(
     [
-      {title:"Meeting with KP Oli", isCompleted:false},
-      {title:"Deployment of todo app", isCompleted:true},
-      {title:"Buy potatoes from supermarket", isCompleted:true},
-      {title:"Week 5 DQ of Data Structures", isCompleted:false},
-      {title:"Send email to Manoj Pandey", isCompleted:true},
+      {title:"Meeting with KP Oli",  taskNo:1},
+      {title:"Deployment of todo app", taskNo:2},
+      {title:"Buy potatoes from supermarket", taskNo:3},
+      {title:"Week 5 DQ of Data Structures", taskNo:4},
+      {title:"Send email to Manoj Pandey", taskNo:5},
     ]
   )
+
+  const [completed, setCompleted] = useState([])
 
   const handleAdd = ()=>{
     console.log("Added")
   }
 
-  const handleCompleted = ()=>{
-    console.log("Completed")
+  const handleCompleted = (id)=>{
+    let completedTask = toDos.filter((item)=>item.taskNo==id)
+    setCompleted([...completed, completedTask])
+    handleDelete(id);
   }
 
-  const handleDelete = ()=>{
-    console.log("Deleted")
+  const handleDelete = (id)=>{
+    let remainingTask = toDos.filter((item)=>item.taskNo!=id)
+    setToDos(remainingTask)
   }
 
 
@@ -32,7 +37,7 @@ function App() {
     <>
     <Navbar/>
     <Inputbox handleAdd={handleAdd}/>
-    <Tasklist toDos={toDos} handleCompleted={handleCompleted} handleDelete={handleDelete}/>
+    <Tasklist toDos={toDos} completed={completed} handleCompleted={handleCompleted} handleDelete={handleDelete}/>
     </>
   )
 }
