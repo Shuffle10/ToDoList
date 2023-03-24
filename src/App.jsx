@@ -1,35 +1,47 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Inputbox from './components/InputBox'
 import Navbar from './components/Navbar'
 import Tasklist from './components/TaskList'
 
 function App() {
+  
+  const [toDos, setToDos] = useState((JSON.parse(localStorage.getItem("tasks"))==null)?[]:JSON.parse(localStorage.getItem("tasks")));
+  const [completed, setCompleted] = useState((JSON.parse(localStorage.getItem("completed"))==null)?[]:JSON.parse(localStorage.getItem("completed")));
 
-  const [toDos, setToDos] = useState(
-    [
-      {title:"Meeting with KP Oli",  taskNo:1},
-      {title:"Deployment of todo app", taskNo:2},
-      {title:"Buy potatoes from supermarket", taskNo:3},
-      {title:"Week 5 DQ of Data Structures", taskNo:4},
-      {title:"Send email to Manoj Pandey", taskNo:5},
-    ]
-  )
-
-  const [completed, setCompleted] = useState([])
 
   const handleAdd = ()=>{
-    console.log("Added")
+    if(document.getElementById("toDo").value.trim().length>0){
+      let newTask= {title:document.getElementById("toDo").value, taskNo: toDos.length+1}
+      setToDos([...toDos, newTask]);
+      document.getElementById("toDo").value = '';
+    }
+    else{
+      alert("Invalit Input!")
+      document.getElementById("toDo").value = '';
+    }
   }
 
-  const handleCompleted = (id)=>{
+
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(toDos));
+  }, [toDos]);
+
+  useEffect(() => {
+    localStorage.setItem('completed', JSON.stringify(completed));
+  }, [completed]);
+
+
+  function handleCompleted(id){
     let completedTask = toDos.filter((item)=>item.taskNo==id)
     setCompleted([...completed, completedTask])
-    handleDelete(id);
+    handleDelete(id)
   }
 
   const handleDelete = (id)=>{
     let remainingTask = toDos.filter((item)=>item.taskNo!=id)
     setToDos(remainingTask)
+    console.log(localStorage.getItem("pending"))
   }
 
 
@@ -37,7 +49,7 @@ function App() {
     <>
     <Navbar/>
     <Inputbox handleAdd={handleAdd}/>
-    <Tasklist toDos={toDos} completed={completed} handleCompleted={handleCompleted} handleDelete={handleDelete}/>
+    { (toDos.length>0 || completed.length>0 ) && <Tasklist toDos={toDos} completed={completed} handleCompleted={handleCompleted} handleDelete={handleDelete}/>}
     </>
   )
 }
