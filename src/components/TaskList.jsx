@@ -1,12 +1,14 @@
-function Tasklist({toDos, completed, handleCompleted, handleDelete, handleReset}){
+function Tasklist({toDos, completed, showCompleted, handleCompleted, handleDelete, handleReset, handlePendingClicked, handleCompletedClicked}){
  return(
     <div className="task-container">
     <div className="task-categories">
-        <p>Pending({toDos.length})</p>
-        <p>Completed({completed.length})</p>
+        <p onClick={()=>handlePendingClicked()}>Pending({toDos.length})</p>
+        <p onClick={()=>handleCompletedClicked()}>Completed({completed.length})</p>
 
     </div>
-    {toDos.map((item)=>(
+    
+    {(!showCompleted) && <>
+    {toDos?.map((item)=>(
         <div className="task-item" key={item.taskNo}>
             <p style={{color:'#303030'}}>  {item.title} </p>
             <div className="button-container">
@@ -15,6 +17,17 @@ function Tasklist({toDos, completed, handleCompleted, handleDelete, handleReset}
             </div>
         </div>
     ))}
+    </>}
+
+    {showCompleted && <>
+    {completed?.map((item)=>(
+        <div className="task-item" key={item.taskNo}>
+            <p style={{color:'gray'}}>  {item.title} </p>
+            <div className="button-container">
+            </div>
+        </div>
+    ))}
+    </>}
 
     
     <button className="button" style={{marginTop:'40px'}} onClick={()=>handleReset()}>Reset</button>

@@ -7,6 +7,7 @@ function App() {
 
   const [toDos, setToDos] = useState((JSON.parse(localStorage.getItem("tasks"))==null)?[]:JSON.parse(localStorage.getItem("tasks")));
   const [completed, setCompleted] = useState((JSON.parse(localStorage.getItem("completed"))==null)?[]:JSON.parse(localStorage.getItem("completed")));
+  const [showCompleted, setShowCompleted] = useState(false);
 
 
   const handleAdd = ()=>{
@@ -21,6 +22,20 @@ function App() {
     }
   }
 
+  const handleKeyDown = (event)=>{
+    if (event.keyCode==13){
+      handleAdd();
+    }
+  }
+
+  const handleCompletedClicked = ()=>{
+    setShowCompleted(true)
+  }
+
+  const handlePendingClicked = ()=>{
+    setShowCompleted(false)
+  }
+
 
 
   useEffect(() => {
@@ -33,15 +48,14 @@ function App() {
 
 
   const handleCompleted = (id) => {
-    let completedTask = toDos.filter((item)=>item.taskNo==id)
-    setCompleted([...completed, completedTask])
+    let completedTask = toDos.find((item)=>item.taskNo==id)
+    setCompleted(prev => [...prev, completedTask])
     handleDelete(id)
   }
 
   const handleDelete = (id)=>{
     let remainingTask = toDos.filter((item)=>item.taskNo!=id)
     setToDos(remainingTask)
-    console.log(localStorage.getItem("pending"))
   }
 
   const handleReset = () =>{
@@ -53,8 +67,8 @@ function App() {
   return (
     <>
     <Navbar/>
-    <Inputbox handleAdd={handleAdd}/>
-    { (toDos.length>0 || completed.length>0 ) && <Tasklist toDos={toDos} completed={completed} handleCompleted={handleCompleted} handleDelete={handleDelete} handleReset={handleReset} />}
+    <Inputbox handleAdd={handleAdd} handleKeyDown={handleKeyDown}/>
+    <Tasklist toDos={toDos} completed={completed} showCompleted={showCompleted} handleCompleted={handleCompleted} handleDelete={handleDelete} handleReset={handleReset} handleCompletedClicked={handleCompletedClicked} handlePendingClicked={handlePendingClicked}/>
     </>
   )
 }
