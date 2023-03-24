@@ -1,8 +1,8 @@
-function Inputbox(){
+function Inputbox({handleAdd}){
  return(
     <div className="input-section">
         <input className="todo-box" type="text" name="toDo" id="toDo" placeholder="Enter your to-do task"/>
-        {/* <input type="datetime" name="time" id="time"/> */}
+        <button className="button" onClick={()=>handleAdd()}>Add</button>
     </div>
  )
 }

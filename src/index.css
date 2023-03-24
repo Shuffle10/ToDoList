@@ -21,6 +21,9 @@
     justify-content: center;
     margin-top: 150px;
     margin-bottom: 100px;
+    align-items: center;
+    /* gap: 15px; */
+
 }
 
 .todo-box{
@@ -31,4 +34,37 @@
     width: 800px;
     padding: 5px 15px;
     font-size: 22px;
+}
+
+.todo-box:focus{
+    outline: none;
+}
+
+.button{
+    min-width: 80px;
+    padding: 0px 10px;
+    margin-left: 10px;
+    height: 50px;
+    border: none;
+    background-color: rgb(230, 149, 0);
+    color: white;
+    font-size: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.task-container{
+    width: 60%;
+    margin: auto;
+}
+
+.task-item{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 10px;
+    border: 1px solid rgb(173, 173, 173);
+    min-height: 50px;
+    margin: 10px 0px;
+    font-size: 24px;
 }
