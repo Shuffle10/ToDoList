@@ -1,4 +1,4 @@
-function Tasklist({toDos, completed, handleCompleted, handleDelete}){
+function Tasklist({toDos, completed, handleCompleted, handleDelete, handleReset}){
  return(
     <div className="task-container">
     <div className="task-categories">
@@ -15,17 +15,9 @@ function Tasklist({toDos, completed, handleCompleted, handleDelete}){
             </div>
         </div>
     ))}
+
     
-
-    {/* {completed.map((e)=>(
-           <div className="task-item" key={e.taskNo}>
-               <p style={{color:'#303030'}}>  {e.title} </p>
-               <div className="button-container">
-               <button className="button" style={{backgroundColor:'#ba182b'}} onClick={()=> handleDelete(e.taskNo)}> Delete! </button>
-               </div>
-           </div>
-       ))} */}
-
+    <button className="button" style={{marginTop:'40px'}} onClick={()=>handleReset()}>Reset</button>
 
     </div>
     )

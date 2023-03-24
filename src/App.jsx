@@ -4,7 +4,7 @@ import Navbar from './components/Navbar'
 import Tasklist from './components/TaskList'
 
 function App() {
-  
+
   const [toDos, setToDos] = useState((JSON.parse(localStorage.getItem("tasks"))==null)?[]:JSON.parse(localStorage.getItem("tasks")));
   const [completed, setCompleted] = useState((JSON.parse(localStorage.getItem("completed"))==null)?[]:JSON.parse(localStorage.getItem("completed")));
 
@@ -32,7 +32,7 @@ function App() {
   }, [completed]);
 
 
-  function handleCompleted(id){
+  const handleCompleted = (id) => {
     let completedTask = toDos.filter((item)=>item.taskNo==id)
     setCompleted([...completed, completedTask])
     handleDelete(id)
@@ -44,12 +44,17 @@ function App() {
     console.log(localStorage.getItem("pending"))
   }
 
+  const handleReset = () =>{
+    setToDos([])
+    setCompleted([])
+  }
+
 
   return (
     <>
     <Navbar/>
     <Inputbox handleAdd={handleAdd}/>
-    { (toDos.length>0 || completed.length>0 ) && <Tasklist toDos={toDos} completed={completed} handleCompleted={handleCompleted} handleDelete={handleDelete}/>}
+    { (toDos.length>0 || completed.length>0 ) && <Tasklist toDos={toDos} completed={completed} handleCompleted={handleCompleted} handleDelete={handleDelete} handleReset={handleReset} />}
     </>
   )
 }
