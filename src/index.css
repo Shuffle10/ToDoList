@@ -77,3 +77,20 @@
     margin-bottom: 30px;
     gap: 15px;
 }
+
+.task-categories p{
+    cursor: pointer;
+    border: 1px solid gray;
+    min-width: 120px;
+    text-align: center;
+    padding: 10px 0px;
+    border-radius: 5px;
+    background-color: rgba(197, 197, 197, 0.459);
+    border: 1px solid transparent;
+    transition: 0.3s;
+}
+
+.task-categories p:hover{
+    background-color: rgb(196, 219, 226);
+    border: 1px solid gray;
+}
