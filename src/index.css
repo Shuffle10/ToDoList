@@ -17,13 +17,9 @@
 }
 
 .input-section{
-    display: flex;
-    justify-content: center;
-    margin-top: 150px;
-    margin-bottom: 50px;
-    align-items: center;
-    /* gap: 15px; */
-
+    width: 60%;
+    margin: 50px auto;
+    text-align: center;
 }
 
 .todo-box{
@@ -31,7 +27,7 @@
     border: none;
     height: 40px;
     border-radius: 10px;
-    width: 800px;
+    width: 70%; 
     padding: 5px 15px;
     font-size: 22px;
 }
@@ -41,7 +37,7 @@
 }
 
 .button{
-    min-width: 80px;
+    min-width: 10%;
     padding: 0px 10px;
     margin-left: 10px;
     height: 50px;

@@ -22,6 +22,24 @@ function App() {
     }
   }
 
+  const handleCompleted = (id) => {
+    setTimeout(()=>{
+      setCompleted(prev => [...prev, completedTask])
+      let completedTask = toDos.find((item)=>item.taskNo==id)
+      handleDelete(id)
+    },5000)
+  }
+
+  const handleDelete = (id)=>{
+    let remainingTask = toDos.filter((item)=>item.taskNo!=id)
+    setToDos(remainingTask)
+  }
+
+  const handleReset = () =>{
+    setToDos([])
+    setCompleted([])
+  }
+
   const handleKeyDown = (event)=>{
     if (event.keyCode==13){
       handleAdd();
@@ -47,21 +65,6 @@ function App() {
   }, [completed]);
 
 
-  const handleCompleted = (id) => {
-    let completedTask = toDos.find((item)=>item.taskNo==id)
-    setCompleted(prev => [...prev, completedTask])
-    handleDelete(id)
-  }
-
-  const handleDelete = (id)=>{
-    let remainingTask = toDos.filter((item)=>item.taskNo!=id)
-    setToDos(remainingTask)
-  }
-
-  const handleReset = () =>{
-    setToDos([])
-    setCompleted([])
-  }
 
 
   return (
