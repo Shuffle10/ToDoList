@@ -8,7 +8,7 @@ function Tasklist({toDos, completed, showCompleted, handleCompleted, handleDelet
     </div>
     
     {(!showCompleted)?<>
-    {(toDos.reverse())?.map((item)=>(
+    {toDos?.map((item)=>(
         <div className="task-item" key={item.taskNo}>
             <p style={{color:'#303030'}}>  {item.title} </p>
             <div className="button-container">
@@ -25,7 +25,7 @@ function Tasklist({toDos, completed, showCompleted, handleCompleted, handleDelet
     </>
 
     
-    :<>{(completed.reverse())?.map((item)=>(
+    :<>{completed?.map((item)=>(
         <div className="task-item">
             <p style={{color:'gray'}}>  {item.title} </p>
             <div className="button-container">

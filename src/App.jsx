@@ -16,8 +16,8 @@ function App() {
 
   const handleAdd = ()=>{
     if(document.getElementById("toDo").value.trim().length>0){
-      let newTask= {title:document.getElementById("toDo").value, taskNo: ((toDos.length)+1), canUndo:false}
-      setToDos(prev=>[...prev, newTask]);
+      let newTask= {title:document.getElementById("toDo").value, taskNo:((toDos.length+completed.length)+1), canUndo:false};
+      setToDos(prev=>[newTask,...prev]);
       document.getElementById("toDo").value = '';
     }
     else{
@@ -29,12 +29,12 @@ function App() {
 
   function handleCompleted(id){
     let completedTask = toDos.find((item)=>item.taskNo==id);
-    updatedToDos(id, "canUndo", true);
+    completedTask.canUndo = true;
     setTimeoutId(setTimeout(()=>{
       updatedToDos(id, "canUndo", false);
-      setCompleted(prev => [...prev, completedTask])
+      setCompleted(prev => [completedTask, ...prev])
       handleDelete(id)
-    },3000))
+    },5000))
   }
 
   const handleDelete = (id)=>{ 
@@ -84,8 +84,6 @@ function App() {
     localStorage.setItem('tasks', JSON.stringify(toDos));
     localStorage.setItem('completed', JSON.stringify(completed));
   }, [toDos, completed]);
-
-
 
 
   return (
