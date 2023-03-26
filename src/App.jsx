@@ -81,8 +81,8 @@ function App() {
 
 
   useEffect(() => {
-    localStorage.setItem('completed', JSON.stringify(completed));
     localStorage.setItem('tasks', JSON.stringify(toDos));
+    localStorage.setItem('completed', JSON.stringify(completed));
   }, [toDos, completed]);
 
 
