@@ -29,7 +29,7 @@ function App() {
 
   function handleCompleted(id){
     let completedTask = toDos.find((item)=>item.taskNo==id);
-    completedTask.canUndo = true;
+    updatedToDos(id, "canUndo", true);
     setTimeoutId(setTimeout(()=>{
       updatedToDos(id, "canUndo", false);
       setCompleted(prev => [completedTask, ...prev])
@@ -78,6 +78,14 @@ function App() {
   const handlePendingClicked = ()=>{
     setShowCompleted(false)
   }
+
+  useEffect(()=>{
+    setToDos(prev =>
+      prev.map(task =>
+        task.taskNo? { ...task, ["canUndo"]: false } : task
+      )
+    );
+  },[])
 
 
   useEffect(() => {
